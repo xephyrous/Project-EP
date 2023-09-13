@@ -16,11 +16,13 @@ fun main() {
     val img: BufferedImage = ImageIO.read(imgF)
     val testSprite: Sprite = Sprite(0, 0, img.width, img.height)
     testSprite.setImage(img)
+
+    //Add the sprite to the main window
+    mainWind.addObject(testSprite)
      */
 
+     */
     while(true) {
-        /* Base code to draw  a sprite
-        testSprite.draw(mainWind)
-         */
+        //mainWind.drawObjects()
     }
 }
