@@ -1,10 +1,10 @@
 package utils
 
-import javax.swing.*
 import java.awt.*
-import java.awt.image.*
-
 import java.awt.event.*
+import java.awt.image.*
+import javax.swing.*
+
 
 public class epWindow(
     private var title: String,
@@ -36,8 +36,15 @@ public class epWindow(
 
     }
 
-    public fun componentResized(ce: ComponentEvent) {
-        println(width)
-        println(height)
+    init {
+        addComponentListener(object : ComponentAdapter() {
+            override fun componentResized(evt: ComponentEvent) {
+                val c = evt.source as Component
+                width = getWidth()
+                height = getHeight()
+                val resizedImg: BufferedImage = resizeImage(backImg, width, height)
+                backImg = resizedImg
+            }
+        })
     }
 }
