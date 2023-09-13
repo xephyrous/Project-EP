@@ -1,5 +1,5 @@
 package utils
 
-fun physics() {
-    return
+public class Hitbox : physicsObject {
+    override val uuid: Int = register()
 }
