@@ -11,17 +11,15 @@ fun main() {
     val screenSize: Dimension = Toolkit.getDefaultToolkit().screenSize
     val mainWind = epWindow("Project EP", screenSize.width, screenSize.height)
 
-    /* Base code to load a sprite
+    /* Base code to load a sprite and draw to the main window
     val imgF = File("src/main/Assets/motherboard.png")
     val img: BufferedImage = ImageIO.read(imgF)
     val testSprite: Sprite = Sprite(0, 0, img.width, img.height)
     testSprite.setImage(img)
 
-    //Add the sprite to the main window
     mainWind.addObject(testSprite)
      */
 
-     */
     while(true) {
         //mainWind.drawObjects()
     }
