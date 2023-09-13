@@ -4,10 +4,12 @@ import utils.resizeImage
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
+import java.awt.*
 
 fun main() {
-    //Create main window
-    val mainWind = epWindow("Project EP", 800, 400)
+    //Create main window - base is windowed fullscreen, add fullscreen later
+    val screenSize: Dimension = Toolkit.getDefaultToolkit().screenSize
+    val mainWind = epWindow("Project EP", screenSize.width, screenSize.height)
 
     /* Base code to load a sprite
     val imgF = File("src/main/Assets/motherboard.png")

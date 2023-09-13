@@ -17,6 +17,7 @@ public class epWindow(
     init {
         setTitle(title)
         setSize(width, height)
+        isResizable = false
         isVisible = true
 
         createBufferStrategy(2)
