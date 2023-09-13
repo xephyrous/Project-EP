@@ -1,6 +1,6 @@
 package utils
 
-import java.awt.Graphics
+import java.awt.Graphics2D
 
 var currID: Int = 0
 
@@ -17,7 +17,7 @@ fun register() : Int {
 }
 
 interface drawObject {
-    fun draw(gpx: Graphics)
+    fun draw(wind: epWindow)
     val uuid: Int
 }
 
