@@ -38,3 +38,10 @@ interface shapeObject {
     fun setGradient(colors: Vector<Color>)
     fun rebuildShape()
 }
+
+interface hitboxShape {
+    var points: Vector<Pair<Double, Double>>
+
+    fun build()
+    fun inShape(pX: Double, pY: Double) : Boolean
+}
