@@ -62,7 +62,8 @@ public class epWindow(
     }
 
     public fun drawObjects() {
-        for(i: Int in 0..windObjects.size) {
+        val start: Long = System.nanoTime()
+        for(i: Int in 0..<windObjects.size) {
             var mask: Boolean = false
             if(windObjectMask.size != 0) {
                 for(n: Int in windObjectMask) {

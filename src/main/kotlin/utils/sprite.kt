@@ -10,7 +10,7 @@ import java.awt.Transparency
 import java.awt.image.BufferedImage
 import java.awt.image.ImageObserver
 
-public class Sprite(x: Int, y: Int, width: Int, height: Int) : drawObject, physicsObject {
+public class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject, physicsObject {
     public var x = x
     public var y = y
     var width = width
@@ -26,10 +26,15 @@ public class Sprite(x: Int, y: Int, width: Int, height: Int) : drawObject, physi
     }
     fun getImage() : Image { return texture }
 
+    fun move(xSpeed: Double, ySpeed: Double, delta: Long) {
+        x += ((delta * xSpeed) / 1000)
+        y += ((delta * ySpeed) / 1000)
+    }
+
     override fun draw(wind: epWindow) {
         val gpx: Graphics2D = wind.bufStrat.drawGraphics as Graphics2D
         gpx.drawImage(wind.backImg, 0, 0, null)
-        gpx.drawImage(texture, x, y, null)
+        gpx.drawImage(texture, x.toInt(), y.toInt(), null)
         gpx.dispose()
         wind.bufStrat.show()
     }
