@@ -24,3 +24,7 @@ interface drawObject {
 interface physicsObject {
     val uuid: Int
 }
+
+interface shapeObject {
+    val uuid: Int
+}
