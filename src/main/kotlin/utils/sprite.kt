@@ -19,10 +19,7 @@ public class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject,
     lateinit var texture: BufferedImage
 
     fun setImage(img: BufferedImage) {
-        val gConfig: GraphicsConfiguration =
-            GraphicsEnvironment.getLocalGraphicsEnvironment().defaultScreenDevice.defaultConfiguration
-        val gpuImage: Image = gConfig.createCompatibleImage(img.getWidth(null), img.getHeight(null), Transparency.BITMASK)
-        texture = img
+        texture = createGPUImage(img)
     }
     fun getImage() : Image { return texture }
 
