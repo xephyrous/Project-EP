@@ -1,6 +1,9 @@
 package utils
 
 import java.awt.Graphics2D
+import java.awt.image.BufferedImage
+import java.util.Vector
+import java.awt.*
 
 var currID: Int = 0
 
@@ -23,4 +26,15 @@ interface drawObject {
 
 interface physicsObject {
     val uuid: Int
+}
+
+interface shapeObject {
+    val uuid: Int
+    var shapeImg: BufferedImage
+    var colors: Vector<Color>
+
+    fun rotate(deg: Int)
+    fun setColor(col: Color)
+    fun setGradient(colors: Vector<Color>)
+    fun rebuildShape()
 }
