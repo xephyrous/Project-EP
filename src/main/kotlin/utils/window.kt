@@ -1,11 +1,10 @@
 package utils
 
-import com.sun.org.apache.xpath.internal.operations.Bool
 import java.awt.*
 import java.awt.event.*
 import java.awt.image.*
+import java.util.*
 import javax.swing.*
-import java.util.Vector
 
 
 public class epWindow(
@@ -20,9 +19,11 @@ public class epWindow(
 
     //Initialize main window properties, double buffering, and background
     init {
+        dispose()
         setTitle(title)
         setSize(width, height)
         isResizable = false
+        isUndecorated = true
         isVisible = true
 
         createBufferStrategy(2)
