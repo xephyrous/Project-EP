@@ -1,3 +1,4 @@
+import utils.RectangleShape
 import utils.Sprite
 import utils.epWindow
 import java.awt.*
@@ -9,7 +10,7 @@ fun main() {
     var lastLoopTime: Long = System.currentTimeMillis()
     var running: Boolean = true
 
-    //Create main window - base is windowed fullscreen, add fullscreen later
+    //Create main window
     val screenSize: Dimension = Toolkit.getDefaultToolkit().screenSize
     val mainWind = epWindow("Project EP", screenSize.width, screenSize.height)
 
