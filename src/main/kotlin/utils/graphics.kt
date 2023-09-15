@@ -56,6 +56,7 @@ public class RectangleShape(
         val baseImg: BufferedImage = createGPUImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB)
         val gpx: Graphics2D = baseImg.createGraphics()
 
+        gpx.translate((newWidth - width) / 2, (newHeight - height) / 2)
         gpx.rotate(Math.toRadians(rotation), (width / 2).toDouble(), (height / 2).toDouble());
 
         if(colors.size == 1) {
