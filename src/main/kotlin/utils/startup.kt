@@ -9,7 +9,7 @@ import javax.imageio.ImageIO
 
 fun whereIsHe() {
     try {
-        val himFile = File("src/main/Assets/him.png")
+        val himFile = File("src/main/Assets/him.jpg")
         val himImage: BufferedImage = ImageIO.read(himFile)
     } catch(err: IOException) {
         while(true) {
