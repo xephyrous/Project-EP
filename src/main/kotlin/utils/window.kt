@@ -73,5 +73,6 @@ public class epWindow(
             }
             if(!mask) { windObjects[i].draw(this) }
         }
+        bufStrat.show()
     }
 }

@@ -33,6 +33,5 @@ public class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject,
         gpx.drawImage(wind.backImg, 0, 0, null)
         gpx.drawImage(texture, x.toInt(), y.toInt(), null)
         gpx.dispose()
-        wind.bufStrat.show()
     }
 }
