@@ -1,12 +1,15 @@
 import utils.RectangleShape
 import utils.Sprite
 import utils.epWindow
+import utils.whereIsHe
 import java.awt.*
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
 
 fun main() {
+    whereIsHe()
+
     var lastLoopTime: Long = System.currentTimeMillis()
     var running: Boolean = true
 
