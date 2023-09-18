@@ -16,7 +16,7 @@ fun main() {
 
     // Base code to load a sprite and draw to the main window
     /*
-    val imgF = File("src/main/Assets/motherboard.png")
+    val imgF = File("src/main/Assets/project_ep_logo.png")
     val img: BufferedImage = ImageIO.read(imgF)
     val testSprite: Sprite = Sprite(0.0, 0.0, img.width, img.height)
     testSprite.setImage(img)
