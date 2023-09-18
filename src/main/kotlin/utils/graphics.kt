@@ -3,8 +3,6 @@ package utils
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
-import java.awt.geom.AffineTransform
-import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
 import java.nio.Buffer
 import java.util.*
@@ -36,15 +34,11 @@ public class RectangleShape(
         wind.bufStrat.show()
     }
 
-    override fun rotate(deg: Int) {
+    override fun rotate(deg: Double) { rotation = deg }
 
-    }
+    override fun setColor(col: Color) { colors[0] = col; rebuildShape() }
 
-    override fun setColor(col: Color) { colors[0] = col }
-
-    override fun setGradient(colors: Vector<Color>) {
-
-    }
+    override fun setGradient(colArr: Vector<Color>) { colors = colArr }
 
     override fun rebuildShape() {
         val sin: Double = abs(sin(Math.toRadians(rotation)))
