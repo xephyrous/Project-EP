@@ -33,8 +33,8 @@ interface shapeObject {
     var shapeImg: BufferedImage
     var colors: Vector<Color>
 
-    fun rotate(deg: Int)
+    fun rotate(deg: Double)
     fun setColor(col: Color)
-    fun setGradient(colors: Vector<Color>)
+    fun setGradient(colArr: Array<Color>)
     fun rebuildShape()
 }

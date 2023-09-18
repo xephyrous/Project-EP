@@ -36,14 +36,20 @@ public class RectangleShape(
         wind.bufStrat.show()
     }
 
-    override fun rotate(deg: Int) {
-
+    override fun rotate(deg: Double) {
+        rotation = deg
+        rebuildShape()
     }
 
-    override fun setColor(col: Color) { colors[0] = col }
+    override fun setColor(col: Color) {
+        colors[0] = col
+        rebuildShape()
+    }
 
-    override fun setGradient(colors: Vector<Color>) {
-
+    override fun setGradient(colArr: Array<Color>) {
+        colors.clear()
+        for(i: Int in colArr.indices) { colors.add(colArr[i]) }
+        rebuildShape()
     }
 
     override fun rebuildShape() {
