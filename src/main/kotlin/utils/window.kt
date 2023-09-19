@@ -1,13 +1,12 @@
 package utils
 
 import java.awt.*
-import java.awt.event.*
 import java.awt.image.*
 import java.util.*
 import javax.swing.*
 
 
-public class epWindow(
+class epWindow(
     private var title: String,
     private var width: Int,
     private var height: Int
@@ -16,6 +15,7 @@ public class epWindow(
     var backImg: BufferedImage = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
     private val windObjects: Vector<drawObject> = Vector<drawObject>()
     private val windObjectMask: Vector<Int> = Vector<Int>()
+    private val windPages: Vector<epPage> = Vector<epPage>()
 
     //Initialize main window properties, double buffering, and background
     init {
@@ -33,46 +33,97 @@ public class epWindow(
         backImg.graphics.fillRect(0, 0, backImg.width, backImg.height)
     }
 
-    //Handles resize changes, updates size variables and background image
-    init {
-        addComponentListener(object : ComponentAdapter() {
-            override fun componentResized(evt: ComponentEvent) {
-                val c = evt.source as Component
-                width = getWidth()
-                height = getHeight()
-                val resizedImg: BufferedImage = resizeImage(backImg, width, height)
-                backImg = resizedImg
-            }
-        })
-    }
+    fun addObject(obj: drawObject) { windObjects.add(obj) }
 
-    public fun addObject(obj: drawObject) { windObjects.add(obj) }
-
-    public fun removeObject(obj: drawObject) {
-        for(i: Int in 0..windObjects.size) {
+    fun removeObject(obj: drawObject) {
+        for(i: Int in 0 .. windObjects.size) {
             if(windObjects[i].uuid == obj.uuid) { windObjects.removeAt(i) }
         }
     }
 
-    public fun maskObject(obj: drawObject) { windObjectMask.add(obj.uuid) }
+    fun maskObject(obj: drawObject) { windObjectMask.add(obj.uuid) }
 
-    public fun unmaskObject(obj: drawObject) {
-        for(i: Int in 0..windObjectMask.size) {
+    fun unmaskObject(obj: drawObject) {
+        for(i: Int in 0 .. windObjectMask.size) {
             if(windObjectMask[i] == obj.uuid) { windObjectMask.removeAt(i) }
         }
     }
 
-    public fun drawObjects() {
-        val start: Long = System.nanoTime()
-        for(i: Int in 0..<windObjects.size) {
-            var mask: Boolean = false
+    fun addPage(page: epPage) { windPages.add(page) }
+
+    fun removePage(page: epPage) {
+        for(i: Int in 0 .. windPages.size) {
+            if(windPages[i].uuid == page.uuid) { windPages.removeAt(i) }
+        }
+    }
+
+    fun drawPage(page: epPage) {
+        for(i: Int in 0 ..< windPages.size) {
+            if(windPages[i].uuid == page.uuid) {
+                windPages[i].draw(bufStrat.drawGraphics)
+            }
+        }
+        bufStrat.show()
+    }
+
+    fun drawPages() {
+        for(i: Int in 0 ..< windPages.size) {
+            windPages[i].draw(this.bufStrat.drawGraphics)
+        }
+    }
+
+    fun drawObjects() {
+        for(i: Int in 0 ..< windObjects.size) {
+            var mask = false
             if(windObjectMask.size != 0) {
                 for(n: Int in windObjectMask) {
                     if(n == windObjects[i].uuid) { mask = true; break; }
                 }
             }
-            if(!mask) { windObjects[i].draw(this) }
+            if(!mask) { windObjects[i].draw(bufStrat.drawGraphics) }
         }
         bufStrat.show()
+    }
+}
+
+class epPage(
+    private val wind: epWindow,
+    var x: Int,
+    var y: Int,
+    var width: Int,
+    var height: Int
+) : drawObject {
+    override val uuid: Int = register()
+    private val content: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
+    private val pageObjects: Vector<drawObject> = Vector<drawObject>()
+    private val pageObjectMask: Vector<Int> = Vector<Int>()
+
+    fun addObject(obj: drawObject) { pageObjects.add(obj) }
+
+    fun removeObject(obj: drawObject) {
+        for(i: Int in 0 .. pageObjects.size) {
+            if(pageObjects[i].uuid == obj.uuid) { pageObjects.removeAt(i) }
+        }
+    }
+
+    fun maskObject(obj: drawObject) { pageObjectMask.add(obj.uuid) }
+
+    fun unmaskObject(obj: drawObject) {
+        for(i: Int in 0 .. pageObjectMask.size) {
+            if(pageObjectMask[i] == obj.uuid) { pageObjectMask.removeAt(i) }
+        }
+    }
+
+    override fun draw(target: Graphics) {
+        for(i: Int in 0 ..< pageObjects.size) {
+            var mask: Boolean = false
+            if(pageObjectMask.size != 0) {
+                for(n: Int in pageObjectMask) {
+                    if(n == pageObjects[i].uuid) { mask = true; break; }
+                }
+            }
+            if(!mask) { pageObjects[i].draw(content.graphics) }
+        }
+        target.drawImage(content, x, y, null)
     }
 }

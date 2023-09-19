@@ -1,18 +1,12 @@
 package utils
 
-import java.awt.Color
-import java.awt.Graphics2D
-import java.awt.GraphicsConfigTemplate
-import java.awt.GraphicsConfiguration
-import java.awt.GraphicsEnvironment
-import java.awt.Image
-import java.awt.Transparency
+import java.awt.*
 import java.awt.image.BufferedImage
 import java.awt.image.ImageObserver
 
-public class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject, physicsObject {
-    public var x = x
-    public var y = y
+class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject, physicsObject {
+    var x = x
+    var y = y
     var width = width
     var height = height
     override val uuid: Int = register()
@@ -28,10 +22,8 @@ public class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject,
         y += ((delta * ySpeed) / 1000)
     }
 
-    override fun draw(wind: epWindow) {
-        val gpx: Graphics2D = wind.bufStrat.drawGraphics as Graphics2D
-        gpx.drawImage(wind.backImg, 0, 0, null)
-        gpx.drawImage(texture, x.toInt(), y.toInt(), null)
-        gpx.dispose()
+    override fun draw(target: Graphics) {
+        target.drawImage(texture, x.toInt(), y.toInt(), null)
+        target.dispose()
     }
 }

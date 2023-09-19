@@ -27,11 +27,9 @@ public class RectangleShape(
         rebuildShape()
     }
 
-    override fun draw(wind: epWindow) {
-        val gpx: Graphics = wind.bufStrat.drawGraphics
-        gpx.drawImage(shapeImg, x.toInt(), y.toInt(), null)
-        gpx.dispose()
-        wind.bufStrat.show()
+    override fun draw(target: Graphics) {
+        target.drawImage(shapeImg, x.toInt(), y.toInt(), null)
+        target.dispose()
     }
 
     override fun rotate(deg: Double) { rotation = deg }

@@ -1,6 +1,5 @@
 package utils
 
-import java.awt.Graphics2D
 import java.awt.image.BufferedImage
 import java.util.Vector
 import java.awt.*
@@ -20,7 +19,7 @@ fun register() : Int {
 }
 
 interface drawObject {
-    fun draw(wind: epWindow)
+    fun draw(target: Graphics)
     val uuid: Int
 }
 
@@ -37,4 +36,8 @@ interface shapeObject {
     fun setColor(col: Color)
     fun setGradient(colArr: Vector<Color>)
     fun rebuildShape()
+}
+
+interface wrapper {
+    fun hide()
 }
