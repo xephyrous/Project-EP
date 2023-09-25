@@ -4,13 +4,15 @@ import java.awt.*
 import java.awt.image.BufferedImage
 import java.awt.image.ImageObserver
 
-class Sprite(x: Double, y: Double, width: Int, height: Int) : drawObject, physicsObject {
-    var x = x
-    var y = y
-    var width = width
-    var height = height
+class Sprite(
+    var x: Double,
+    var y: Double,
+    var width: Int,
+    var height: Int
+) : drawObject, physicsObject {
+    override var visible: Boolean = true
     override val uuid: Int = register()
-    lateinit var texture: BufferedImage
+    private lateinit var texture: BufferedImage
 
     fun setImage(img: BufferedImage) {
         texture = createGPUImage(img)

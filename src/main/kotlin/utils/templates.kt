@@ -19,6 +19,8 @@ fun register() : Int {
 }
 
 interface drawObject {
+    var visible: Boolean
+
     fun draw(target: Graphics)
     val uuid: Int
 }
@@ -36,8 +38,4 @@ interface shapeObject {
     fun setColor(col: Color)
     fun setGradient(colArr: Vector<Color>)
     fun rebuildShape()
-}
-
-interface wrapper {
-    fun hide()
 }

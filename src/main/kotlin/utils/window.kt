@@ -12,7 +12,7 @@ class epWindow(
     private var height: Int
 ) : JFrame() {
     val bufStrat: BufferStrategy
-    var backImg: BufferedImage = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+    var backImg: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
     private val windObjects: Vector<drawObject> = Vector<drawObject>()
     private val windObjectMask: Vector<Int> = Vector<Int>()
     private val windPages: Vector<epPage> = Vector<epPage>()
@@ -29,9 +29,12 @@ class epWindow(
         createBufferStrategy(2)
         bufStrat = bufferStrategy
 
-        backImg.graphics.color = Color.red
-        backImg.graphics.fillRect(0, 0, backImg.width, backImg.height)
+        bufStrat.drawGraphics.color = Color.white
+        bufStrat.drawGraphics.fillRect(0, 0, backImg.width, backImg.height)
     }
+
+    fun setBackgroundColor(col: Color) { backImg.graphics.fillRect(0, 0, backImg.width, backImg.height) }
+    fun setBackgroundImage(img: BufferedImage) { backImg = img }
 
     fun addObject(obj: drawObject) { windObjects.add(obj) }
 
@@ -73,6 +76,7 @@ class epWindow(
     }
 
     fun drawObjects() {
+        bufStrat.drawGraphics.drawImage(backImg, 0, 0, null)
         for(i: Int in 0 ..< windObjects.size) {
             var mask = false
             if(windObjectMask.size != 0) {
@@ -93,10 +97,18 @@ class epPage(
     var width: Int,
     var height: Int
 ) : drawObject {
+    override var visible: Boolean = true
     override val uuid: Int = register()
+    private var backImg: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
     private val content: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
     private val pageObjects: Vector<drawObject> = Vector<drawObject>()
     private val pageObjectMask: Vector<Int> = Vector<Int>()
+
+    init {
+        val gpx = backImg.graphics
+        gpx.color = Color.white
+        gpx.fillRect(0, 0, backImg.width, backImg.height)
+    }
 
     fun addObject(obj: drawObject) { pageObjects.add(obj) }
 
@@ -105,6 +117,9 @@ class epPage(
             if(pageObjects[i].uuid == obj.uuid) { pageObjects.removeAt(i) }
         }
     }
+
+    fun setBackgroundColor(col: Color) { backImg.graphics.fillRect(0, 0, backImg.width, backImg.height) }
+    fun setBackgroundImage(img: BufferedImage) { backImg = img }
 
     fun maskObject(obj: drawObject) { pageObjectMask.add(obj.uuid) }
 
@@ -115,6 +130,7 @@ class epPage(
     }
 
     override fun draw(target: Graphics) {
+        content.graphics.drawImage(backImg, 0, 0, null)
         for(i: Int in 0 ..< pageObjects.size) {
             var mask: Boolean = false
             if(pageObjectMask.size != 0) {

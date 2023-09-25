@@ -19,6 +19,7 @@ public class RectangleShape(
     var rotation: Double
 ) : drawObject, shapeObject {
     override val uuid: Int = register()
+    override var visible: Boolean = true
     override lateinit var shapeImg: BufferedImage
     override var colors: Vector<Color> = Vector<Color>()
 
