@@ -4,24 +4,39 @@ import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
-import java.nio.Buffer
 import java.util.*
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.floor
 import kotlin.math.sin
 
-public class RectangleShape(
+class Button(
+    var text: String,
+    var x: Int,
+    var y: Int,
+    var width: Int,
+    var height: Int
+) : DrawObject {
+    override val uuid: Int = register()
+
+    override fun draw(target: Graphics) {
+
+    }
+}
+
+class RectangleShape(
     var x: Double,
     var y: Double,
     var width: Int,
     var height: Int,
     var rotation: Double
-) : drawObject, shapeObject {
+) : DrawObject, shapeObject {
     override val uuid: Int = register()
     override var visible: Boolean = true
     override lateinit var shapeImg: BufferedImage
     override var colors: Vector<Color> = Vector<Color>()
+    var radius: Int = 0
+
 
     init {
         colors.add(Color.black)
