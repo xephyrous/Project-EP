@@ -1,7 +1,5 @@
-import utils.RectangleShape
-import utils.Sprite
-import utils.epWindow
-import utils.whereIsHe
+import utils.*
+import utils.Window
 import java.awt.*
 import java.awt.image.BufferedImage
 import java.io.File
@@ -15,21 +13,25 @@ fun main() {
 
     //Create main window
     val screenSize: Dimension = Toolkit.getDefaultToolkit().screenSize
-    val mainWind = epWindow("Project EP", screenSize.width, screenSize.height)
+    val mainWind = Window("Project EP", screenSize.width, screenSize.height)
 
-    // Base code to load a sprite and draw to the main window
-    /*
+    //Create title page
+    val titleScreen = Page(mainWind, 0, 0, screenSize.width, screenSize.height)
+
+    //Project EP logo
     val imgF = File("src/main/Assets/project_ep_logo.png")
     val img: BufferedImage = ImageIO.read(imgF)
     val testSprite: Sprite = Sprite(0.0, 0.0, img.width, img.height)
     testSprite.setImage(img)
-    mainWind.addObject(testSprite)
-     */
+    titleScreen.addObject(testSprite)
 
+    mainWind.addPage(titleScreen)
+
+    //Main loop
     while(running) {
         val delta: Long = System.currentTimeMillis() - lastLoopTime
         lastLoopTime = System.currentTimeMillis()
 
-        mainWind.drawObjects()
+        mainWind.drawPage(titleScreen)
     }
 }

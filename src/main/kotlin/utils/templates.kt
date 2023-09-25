@@ -1,6 +1,5 @@
 package utils
 
-import java.awt.Graphics2D
 import java.awt.image.BufferedImage
 import java.util.Vector
 import java.awt.*
@@ -19,12 +18,14 @@ fun register() : Int {
     return (currID - 1)
 }
 
-interface drawObject {
-    fun draw(wind: epWindow)
+interface DrawObject {
+    var visible: Boolean
+
+    fun draw(target: Graphics)
     val uuid: Int
 }
 
-interface physicsObject {
+interface PhysicsObject {
     val uuid: Int
 }
 
@@ -35,6 +36,10 @@ interface shapeObject {
 
     fun rotate(deg: Double)
     fun setColor(col: Color)
-    fun setGradient(colArr: Array<Color>)
+    fun setGradient(colArr: Vector<Color>)
     fun rebuildShape()
+}
+
+interface interactable {
+
 }

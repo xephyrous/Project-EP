@@ -21,7 +21,8 @@ fun createGPUImage(width: Int, height: Int, colSpace: Int): BufferedImage {
 fun createGPUImage(img: BufferedImage) : BufferedImage {
     val gConfig: GraphicsConfiguration =
         GraphicsEnvironment.getLocalGraphicsEnvironment().defaultScreenDevice.defaultConfiguration
-    val gpuImage: BufferedImage = gConfig.createCompatibleImage(img.getWidth(null), img.getHeight(null), Transparency.BITMASK)
+    val gpuImage: BufferedImage =
+        gConfig.createCompatibleImage(img.getWidth(null), img.getHeight(null), Transparency.BITMASK)
     gpuImage.graphics.drawImage(img, 0, 0, null)
     return gpuImage
 }
