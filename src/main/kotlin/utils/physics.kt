@@ -1,5 +1,5 @@
 package utils
 
-class Hitbox : physicsObject {
+class Hitbox : PhysicsObject {
     override val uuid: Int = register()
 }

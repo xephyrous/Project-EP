@@ -18,14 +18,14 @@ fun register() : Int {
     return (currID - 1)
 }
 
-interface drawObject {
+interface DrawObject {
     var visible: Boolean
 
     fun draw(target: Graphics)
     val uuid: Int
 }
 
-interface physicsObject {
+interface PhysicsObject {
     val uuid: Int
 }
 
@@ -38,4 +38,8 @@ interface shapeObject {
     fun setColor(col: Color)
     fun setGradient(colArr: Vector<Color>)
     fun rebuildShape()
+}
+
+interface interactable {
+
 }

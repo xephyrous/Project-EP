@@ -6,16 +6,16 @@ import java.util.*
 import javax.swing.*
 
 
-class epWindow(
+class Window(
     private var title: String,
     private var width: Int,
     private var height: Int
 ) : JFrame() {
     val bufStrat: BufferStrategy
     var backImg: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
-    private val windObjects: Vector<drawObject> = Vector<drawObject>()
+    private val windObjects: Vector<DrawObject> = Vector<DrawObject>()
     private val windObjectMask: Vector<Int> = Vector<Int>()
-    private val windPages: Vector<epPage> = Vector<epPage>()
+    private val windPages: Vector<Page> = Vector<Page>()
 
     //Initialize main window properties, double buffering, and background
     init {
@@ -36,31 +36,31 @@ class epWindow(
     fun setBackgroundColor(col: Color) { backImg.graphics.fillRect(0, 0, backImg.width, backImg.height) }
     fun setBackgroundImage(img: BufferedImage) { backImg = img }
 
-    fun addObject(obj: drawObject) { windObjects.add(obj) }
+    fun addObject(obj: DrawObject) { windObjects.add(obj) }
 
-    fun removeObject(obj: drawObject) {
+    fun removeObject(obj: DrawObject) {
         for(i: Int in 0 .. windObjects.size) {
             if(windObjects[i].uuid == obj.uuid) { windObjects.removeAt(i) }
         }
     }
 
-    fun maskObject(obj: drawObject) { windObjectMask.add(obj.uuid) }
+    fun maskObject(obj: DrawObject) { windObjectMask.add(obj.uuid) }
 
-    fun unmaskObject(obj: drawObject) {
+    fun unmaskObject(obj: DrawObject) {
         for(i: Int in 0 .. windObjectMask.size) {
             if(windObjectMask[i] == obj.uuid) { windObjectMask.removeAt(i) }
         }
     }
 
-    fun addPage(page: epPage) { windPages.add(page) }
+    fun addPage(page: Page) { windPages.add(page) }
 
-    fun removePage(page: epPage) {
+    fun removePage(page: Page) {
         for(i: Int in 0 .. windPages.size) {
             if(windPages[i].uuid == page.uuid) { windPages.removeAt(i) }
         }
     }
 
-    fun drawPage(page: epPage) {
+    fun drawPage(page: Page) {
         for(i: Int in 0 ..< windPages.size) {
             if(windPages[i].uuid == page.uuid) {
                 windPages[i].draw(bufStrat.drawGraphics)
@@ -90,18 +90,18 @@ class epWindow(
     }
 }
 
-class epPage(
-    private val wind: epWindow,
+class Page(
+    private val wind: Window,
     var x: Int,
     var y: Int,
     var width: Int,
     var height: Int
-) : drawObject {
+) : DrawObject {
     override var visible: Boolean = true
     override val uuid: Int = register()
     private var backImg: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
     private val content: BufferedImage = createGPUImage(width, height, BufferedImage.TYPE_INT_ARGB)
-    private val pageObjects: Vector<drawObject> = Vector<drawObject>()
+    private val pageObjects: Vector<DrawObject> = Vector<DrawObject>()
     private val pageObjectMask: Vector<Int> = Vector<Int>()
 
     init {
@@ -110,20 +110,21 @@ class epPage(
         gpx.fillRect(0, 0, backImg.width, backImg.height)
     }
 
-    fun addObject(obj: drawObject) { pageObjects.add(obj) }
+    fun addObject(obj: DrawObject) { pageObjects.add(obj) }
 
-    fun removeObject(obj: drawObject) {
+    fun removeObject(obj: DrawObject) {
         for(i: Int in 0 .. pageObjects.size) {
             if(pageObjects[i].uuid == obj.uuid) { pageObjects.removeAt(i) }
         }
     }
 
     fun setBackgroundColor(col: Color) { backImg.graphics.fillRect(0, 0, backImg.width, backImg.height) }
+
     fun setBackgroundImage(img: BufferedImage) { backImg = img }
 
-    fun maskObject(obj: drawObject) { pageObjectMask.add(obj.uuid) }
+    fun maskObject(obj: DrawObject) { pageObjectMask.add(obj.uuid) }
 
-    fun unmaskObject(obj: drawObject) {
+    fun unmaskObject(obj: DrawObject) {
         for(i: Int in 0 .. pageObjectMask.size) {
             if(pageObjectMask[i] == obj.uuid) { pageObjectMask.removeAt(i) }
         }

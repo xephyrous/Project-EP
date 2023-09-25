@@ -2,14 +2,13 @@ package utils
 
 import java.awt.*
 import java.awt.image.BufferedImage
-import java.awt.image.ImageObserver
 
 class Sprite(
     var x: Double,
     var y: Double,
     var width: Int,
     var height: Int
-) : drawObject, physicsObject {
+) : DrawObject, PhysicsObject {
     override var visible: Boolean = true
     override val uuid: Int = register()
     private lateinit var texture: BufferedImage
