@@ -18,6 +18,7 @@ class Button(
     var height: Int
 ) : DrawObject {
     override val uuid: Int = register()
+    override var visible: Boolean = true
 
     override fun draw(target: Graphics) {
 

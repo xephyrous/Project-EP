@@ -13,7 +13,7 @@ fun whereIsHe() {
         val himImage: BufferedImage = ImageIO.read(himFile)
     } catch(err: IOException) {
         while(true) {
-            val byebye = epWindow("bye bye :)", 10000, 10000)
+            val byebye = Window("bye bye :)", 10000, 10000)
             byebye.drawObjects()
         }
     }
