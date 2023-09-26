@@ -1,6 +1,7 @@
 import utils.*
 import utils.Window
 import java.awt.*
+import utils.Button
 import java.awt.image.BufferedImage
 import java.io.File
 import javax.imageio.ImageIO
@@ -24,6 +25,9 @@ fun main() {
     val testSprite: Sprite = Sprite(0.0, 0.0, img.width, img.height)
     testSprite.setImage(img)
     titleScreen.addObject(testSprite)
+
+    val btn = Button("Test Button", 100, 100, 50, 50)
+    titleScreen.addObject(btn)
 
     mainWind.addPage(titleScreen)
 

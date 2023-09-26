@@ -33,6 +33,7 @@ interface shapeObject {
     val uuid: Int
     var shapeImg: BufferedImage
     var colors: Vector<Color>
+    var clipMask: Shape
 
     fun rotate(deg: Double)
     fun setColor(col: Color)
