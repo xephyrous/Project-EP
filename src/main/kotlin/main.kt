@@ -31,11 +31,17 @@ fun main() {
 
     mainWind.addPage(titleScreen)
 
+    //val frameHandler = FrameHandler(mainWind)
+
     //Main loop
     while(running) {
+        //frameHandler.startFrame()
+
         val delta: Long = System.currentTimeMillis() - lastLoopTime
         lastLoopTime = System.currentTimeMillis()
 
         mainWind.drawPage(titleScreen)
+
+        //frameHandler.update()
     }
 }
