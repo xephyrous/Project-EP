@@ -40,6 +40,13 @@ interface shapeObject {
     fun rebuildShape()
 }
 
+interface hitboxShape {
+    var points: Vector<Pair<Double, Double>>
+
+    fun build()
+    fun inShape(pX: Double, pY: Double) : Boolean
+}
+
 interface interactable {
 
 }
