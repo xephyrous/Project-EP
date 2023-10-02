@@ -3,48 +3,57 @@ package utils
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
-import java.awt.geom.AffineTransform
-import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
-import java.nio.Buffer
 import java.util.*
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.floor
 import kotlin.math.sin
 
-public class RectangleShape(
+class Button(
+    var text: String,
+    var x: Int,
+    var y: Int,
+    var width: Int,
+    var height: Int
+) : DrawObject {
+    override val uuid: Int = register()
+    override var visible: Boolean = true
+
+    override fun draw(target: Graphics) {
+
+    }
+}
+
+class RectangleShape(
     var x: Double,
     var y: Double,
     var width: Int,
     var height: Int,
     var rotation: Double
-) : drawObject, shapeObject {
+) : DrawObject, shapeObject {
     override val uuid: Int = register()
+    override var visible: Boolean = true
     override lateinit var shapeImg: BufferedImage
     override var colors: Vector<Color> = Vector<Color>()
+    var radius: Int = 0
+
 
     init {
         colors.add(Color.black)
         rebuildShape()
     }
 
-    override fun draw(wind: epWindow) {
-        val gpx: Graphics = wind.bufStrat.drawGraphics
-        gpx.drawImage(shapeImg, x.toInt(), y.toInt(), null)
-        gpx.dispose()
-        wind.bufStrat.show()
+    override fun draw(target: Graphics) {
+        target.drawImage(shapeImg, x.toInt(), y.toInt(), null)
+        target.dispose()
     }
 
-    override fun rotate(deg: Int) {
+    override fun rotate(deg: Double) { rotation = deg }
 
-    }
+    override fun setColor(col: Color) { colors[0] = col; rebuildShape() }
 
-    override fun setColor(col: Color) { colors[0] = col }
-
-    override fun setGradient(colors: Vector<Color>) {
-
-    }
+    override fun setGradient(colArr: Vector<Color>) { colors = colArr }
 
     override fun rebuildShape() {
         val sin: Double = abs(sin(Math.toRadians(rotation)))
