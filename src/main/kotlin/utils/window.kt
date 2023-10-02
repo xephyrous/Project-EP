@@ -91,7 +91,6 @@ class Window(
 }
 
 class Page(
-    private val wind: Window,
     var x: Int,
     var y: Int,
     var width: Int,
