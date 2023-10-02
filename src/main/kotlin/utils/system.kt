@@ -15,13 +15,13 @@ import javax.swing.JPanel
 class FrameHandler(
     wind: Window
 ) : JFrame() {
-    var frameTime: Long = 0
-    var prevFrameTime: Long = 0
-    val bufStrat: BufferStrategy
-    var frameAvg: Int = 0
-    var fpsGraph: Vector<Int> = Vector<Int>()
-    var maxFps: Int = 0
-    var minFps: Int = 100
+    private var frameTime: Long = 0
+    private var prevFrameTime: Long = 0
+    private val bufStrat: BufferStrategy
+    private var frameAvg: Int = 0
+    private var fpsGraph: Vector<Int> = Vector<Int>()
+    private var maxFps: Int = 0
+    private var minFps: Int = 10000
 
     init {
         dispose()
@@ -46,8 +46,8 @@ class FrameHandler(
         prevFrameTime = System.currentTimeMillis()
         fpsGraph.add((1000 / frameTime).toInt())
 
-        if(frameTime > maxFps) { maxFps = frameTime.toInt() }
-        if(frameTime < minFps) { minFps = frameTime.toInt() }
+        if((1000 / frameTime) > maxFps) { maxFps = (1000 / frameTime).toInt() }
+        if((1000 / frameTime) < minFps) { minFps = (1000 / frameTime).toInt() }
     }
 
     fun update() {
