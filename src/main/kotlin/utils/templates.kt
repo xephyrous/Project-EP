@@ -29,7 +29,7 @@ interface PhysicsObject {
     val uuid: Int
 }
 
-interface shapeObject {
+interface ShapeObject {
     val uuid: Int
     var shapeImg: BufferedImage
     var colors: Vector<Color>
@@ -40,13 +40,13 @@ interface shapeObject {
     fun rebuildShape()
 }
 
-interface hitboxShape {
+interface HitboxShape {
     var points: Vector<Pair<Double, Double>>
 
     fun build()
     fun inShape(pX: Double, pY: Double) : Boolean
 }
 
-interface interactable {
+interface Interactable {
 
 }
