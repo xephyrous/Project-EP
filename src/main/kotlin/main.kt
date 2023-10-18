@@ -16,7 +16,7 @@ fun main() {
     val mainWind = Window("Project EP", screenSize.width, screenSize.height)
 
     //Create title page
-    val titleScreen = Page(mainWind, 0, 0, screenSize.width, screenSize.height)
+    val titleScreen = Page(0, 0, screenSize.width, screenSize.height)
 
     //Project EP logo
     val imgF = File("src/main/Assets/project_ep_logo.png")
@@ -24,6 +24,14 @@ fun main() {
     val testSprite: Sprite = Sprite(0.0, 0.0, img.width, img.height)
     testSprite.setImage(img)
     titleScreen.addObject(testSprite)
+
+    //Title table graphic
+    val tableF = File("src/main/Assets/Pool Table A.png")
+    var tableImg: BufferedImage = ImageIO.read(tableF)
+    tableImg = resizeImage(tableImg, (tableImg.width / 1.5).toInt(), (tableImg.height / 1.5).toInt())
+    val tableSprite: Sprite = Sprite(0.0, 0.0, tableImg.width, tableImg.height)
+    tableSprite.setImage(tableImg)
+    titleScreen.addObject(tableSprite)
 
     mainWind.addPage(titleScreen)
 

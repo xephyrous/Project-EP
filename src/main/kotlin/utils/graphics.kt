@@ -31,7 +31,7 @@ class RectangleShape(
     var width: Int,
     var height: Int,
     var rotation: Double
-) : DrawObject, shapeObject {
+) : DrawObject, ShapeObject {
     override val uuid: Int = register()
     override var visible: Boolean = true
     override lateinit var shapeImg: BufferedImage

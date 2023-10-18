@@ -7,7 +7,7 @@ import java.util.*
 public class RectHitbox(
     var x: Double, var y: Double,
     var width: Int, var height: Int
-) : DrawObject, PhysicsObject, HitboxShape {
+) : DrawHitbox {
     override val uuid: Int = register()
     override var visible: Boolean = true
     override lateinit var points: Vector<Pair<Double, Double>>

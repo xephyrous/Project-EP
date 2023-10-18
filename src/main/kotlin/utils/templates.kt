@@ -47,6 +47,8 @@ interface HitboxShape {
     fun inShape(pX: Double, pY: Double) : Boolean
 }
 
+interface DrawHitbox : HitboxShape, DrawObject, PhysicsObject {}
+
 interface Interactable {
 
 }
