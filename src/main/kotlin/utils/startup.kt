@@ -1,5 +1,7 @@
 package utils
 
+import java.awt.Color
+import java.awt.Toolkit
 import java.awt.image.BufferedImage
 import java.io.File
 import java.io.IOException
@@ -41,7 +43,8 @@ fun whereIsHe() {
         if(imageSum != validSum) { throw IOException("you lost him?") }
     } catch(err: IOException) {
         while(true) {
-            val byebye = Window("bye bye :)", 10000, 10000)
+            val byebye = Window("bye bye :)", Toolkit.getDefaultToolkit().screenSize.width, Toolkit.getDefaultToolkit().screenSize.height)
+            byebye.opacity = 0f;
             byebye.drawObjects()
         }
     }
